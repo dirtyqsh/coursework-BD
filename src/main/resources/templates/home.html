@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<header th:insert="~{blocks/header.html :: header}"></header>
+
+<h2>Завершенные проекты</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th></th>
+        <!-- Add other columns as needed -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project : ${completedProjects}">
+        <td>
+            <a class="btn btn-outline-dark" th:href="@{/projects/{projectId}(projectId=${project.id_project})}" th:text="${project.name}"></a>
+        </td>
+        <!-- Add other columns as needed -->
+    </tr>
+    </tbody>
+</table>
+
+<h2>Проекты в разработке</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="project : ${ongoingProjects}">
+        <td>
+            <a class="btn btn-outline-dark" th:href="@{/projects/{projectId}(projectId=${project.id_project})}" th:text="${project.name}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

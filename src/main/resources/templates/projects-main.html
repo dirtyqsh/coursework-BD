@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Проекты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--    <style>-->
+<!--        table {-->
+<!--            border-collapse: collapse;-->
+<!--            width: 100%;-->
+<!--        }-->
+
+<!--        th, td {-->
+<!--            border: 1px solid #dddddd;-->
+<!--            text-align: left;-->
+<!--            padding: 8px;-->
+<!--        }-->
+<!--    </style>-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<header th:insert="~{blocks/header.html :: header}"></header>
+<h1>Проекты</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID договора</th>
+        <th>Название</th>
+        <th>Стоимость</th>
+        <th>Дата начала</th>
+        <th>Дата окончания</th>
+        <th>Статус</th>
+        <th>Руководитель</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="el : ${projects}">
+        <td th:text="${el.id_contract}"></td>
+        <td th:text="${el.name}"></td>
+        <td th:text="${#numbers.formatDecimal(el.cost, 0, 'COMMA', 2, 'POINT')}"></td>
+        <td th:text="${#dates.format(el.date_one, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#dates.format(el.date_two, 'yyyy-MM-dd')}"></td>
+        <td th:text="${el.status} ? 'Завершен' : 'В разработке'"></td>
+        <td>
+            <a th:href="@{/employee/{id}(id=${el.header})}">
+                <span th:text="${el.employee.fio}"></span>
+            </a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
